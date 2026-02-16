@@ -1,0 +1,243 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: 'Strategic Consulting',
+    body: 'Tech stack optimization and architecture planning for long-term growth. We audit your existing infrastructure to eliminate bottlenecks.',
+    icon: 'A',
+  },
+  {
+    title: 'Custom Development',
+    body: 'Bespoke web and desktop applications built with modern frameworks. We deliver robust, secure, and scalable code bases.',
+    icon: '</>',
+  },
+  {
+    title: 'DevOps & Scaling',
+    body: 'Streamlining deployment pipelines and cloud infrastructure management. Focus on reliability, automation, and CI/CD best practices.',
+    icon: 'C',
+  },
+];
+
+const particles = Array.from({ length: 18 }, (_, i) => ({
+  x: (i * 17 + 9) % 100,
+  duration: 12 + (i % 6) * 3,
+  delay: (i % 5) * -2,
+  size: 1 + (i % 4),
+  drift: i % 2 === 0 ? 32 : -28,
+}));
+---
+
+<Layout>
+  <main>
+    <div class="bg-particles" aria-hidden="true">
+      {
+        particles.map((item) => (
+          <span
+            class="particle"
+            style={`--x:${item.x};--duration:${item.duration}s;--delay:${item.delay}s;--size:${item.size};--drift:${item.drift}px;`}
+          />
+        ))
+      }
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#" class="brand has-custom-logo" aria-label="Code Square home">
+          <img
+            src="/logo-codesquare.png"
+            alt="Code Square logo"
+            class="brand-logo"
+            width="28"
+            height="28"
+            onerror="this.parentElement.classList.remove('has-custom-logo'); this.remove();"
+          />
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="brand-text">CODE SQUARE</span>
+        </a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#contact" class="nav-cta">Get Started</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero-bg">
+      <div class="container hero-shell">
+        <div class="hero-card">
+          <p class="label">
+            <span class="typing-text">Software Consulting Excellence</span>
+          </p>
+          <h1>
+            Architecting the
+            <span>Future</span>
+            of Software.
+          </h1>
+          <p class="lead">
+            Code Square LLC provides expert strategic consulting and full-stack development services
+            for modern enterprises ready to scale through technical excellence.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
+            <a href="#services" class="btn btn-secondary">View Case Studies</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="container">
+        <p class="section-tag">Our Expertise</p>
+        <h2>Tailored Solutions for Technical Debt & Innovation</h2>
+        <div class="cards-grid">
+          {
+            services.map((item) => (
+              <article class="service-card">
+                <span class="service-icon" aria-hidden="true">
+                  {item.icon}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise" class="section mindset-section">
+      <div class="container mindset-grid">
+        <div class="code-block" aria-hidden="true">
+          <div class="code-head">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <pre><code>
+<span class="line"><span class="ln">1</span><span class="code"><span class="kw">class</span> <span class="id">EnterpriseScalability</span> <span class="p">&#123;</span></span></span>
+<span class="line"><span class="ln">2</span><span class="code">  <span class="fn">constructor</span>() <span class="p">&#123;</span></span></span>
+<span class="line"><span class="ln">3</span><span class="code">    <span class="prop">this.reliability</span> = <span class="str">'99.99%'</span>;</span></span>
+<span class="line"><span class="ln">4</span><span class="code">    <span class="prop">this.performance</span> = <span class="str">'optimized'</span>;</span></span>
+<span class="line"><span class="ln">5</span><span class="code">  <span class="p">&#125;</span></span></span>
+<span class="line"><span class="ln">6</span><span class="code">  <span class="fn">deploy</span>(solution) <span class="p">&#123;</span></span></span>
+<span class="line"><span class="ln">7</span><span class="code">    <span class="kw">return</span> <span class="id">CodeSquare</span>.<span class="fn">audit</span>(solution);</span></span>
+<span class="line"><span class="ln">8</span><span class="code">  <span class="p">&#125;</span></span></span>
+<span class="line"><span class="ln">9</span><span class="code"><span class="p">&#125;</span></span></span>
+          </code></pre>
+        </div>
+        <div class="mindset-content">
+          <h2>Engineering-First Mindset.</h2>
+          <p>
+            We do not just build features; we engineer systems. Every line of code is written with
+            maintainability and performance as the primary objectives. Partner with a team that
+            understands the nuances of enterprise-level software.
+          </p>
+          <ul>
+            <li>Microservices & Distributed Systems</li>
+            <li>High-Performance Computing</li>
+            <li>Legacy System Modernization</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact-wrap">
+        <h2>Let's Build Something Together</h2>
+        <p>Ready to start your project or need strategic advice? Send us a message.</p>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="field-grid">
+            <label>
+              Full Name
+              <input type="text" name="name" required placeholder="John Doe" />
+            </label>
+            <label>
+              Company Email
+              <input type="email" name="email" required placeholder="john@company.com" />
+            </label>
+          </div>
+          <label>
+            Subject
+            <select name="subject" required>
+              <option value="Custom Development">Custom Development</option>
+              <option value="Software Consulting">Software Consulting</option>
+              <option value="DevOps & Scaling">DevOps & Scaling</option>
+            </select>
+          </label>
+          <label>
+            Project Summary
+            <textarea
+              name="summary"
+              rows="6"
+              required
+              placeholder="Tell us about your technical challenges..."></textarea>
+          </label>
+          <button class="btn submit" type="submit">Send Inquiry</button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer id="process" class="site-footer">
+      <div class="container footer-wrap">
+        <div class="footer-brand">CODE SQUARE</div>
+        <nav aria-label="Footer links">
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">GitHub</a></li>
+          </ul>
+        </nav>
+        <small>© 2026 Code Square LLC. All rights reserved.</small>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.querySelector('#contact-form');
+    const status = document.querySelector('#form-status');
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submit = form.querySelector('button[type="submit"]');
+      const data = new FormData(form);
+      const payload = Object.fromEntries(data.entries());
+
+      submit.disabled = true;
+      status.textContent = 'Sending...';
+      status.dataset.state = 'pending';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+        status.textContent = result.message;
+        status.dataset.state = response.ok ? 'success' : 'error';
+
+        if (response.ok) {
+          form.reset();
+        }
+      } catch {
+        status.textContent = 'Could not send right now. Please try again in a moment.';
+        status.dataset.state = 'error';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  </script>
+</Layout>
