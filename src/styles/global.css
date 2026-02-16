@@ -206,18 +206,25 @@ main > :not(.bg-particles) {
 }
 
 .typing-text {
-  --chars: 29;
-  --track: 0.18em;
-  --typing-width: calc((var(--chars) * 1ch) + (var(--chars) * var(--track)));
+  position: relative;
   display: inline-block;
-  width: 0;
-  max-width: var(--typing-width);
-  overflow: hidden;
+  width: max-content;
+  max-width: 100%;
+  overflow: clip;
   white-space: nowrap;
-  border-right: 2px solid rgba(29, 181, 255, 0.95);
-  animation:
-    type-loop 6s steps(30, end) infinite,
-    cursor-blink 700ms steps(1) infinite;
+  clip-path: inset(0 100% 0 0);
+  animation: type-loop 6s steps(30, end) infinite;
+}
+
+.typing-text::after {
+  content: '';
+  position: absolute;
+  top: 0.08em;
+  right: -0.12em;
+  width: 2px;
+  height: 1.05em;
+  background: rgba(29, 181, 255, 0.95);
+  animation: cursor-blink 700ms steps(1) infinite;
 }
 
 .hero-card h1 {
@@ -419,23 +426,50 @@ main > :not(.bg-particles) {
 }
 
 .kw {
-  color: #89b8ff;
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.type {
+  color: #f8fafc;
+  font-weight: 600;
 }
 
 .id {
-  color: #c9ddff;
+  color: #7dd3fc;
 }
 
 .fn {
-  color: #99c8ff;
+  color: #93c5fd;
 }
 
 .prop {
-  color: #a0bedf;
+  color: #bfdbfe;
 }
 
 .str {
-  color: #1dc0ff;
+  color: #22d3ee;
+}
+
+.num {
+  color: #fbbf24;
+}
+
+.op {
+  color: #cbd5e1;
+}
+
+.obj {
+  color: #e2e8f0;
+}
+
+.arg {
+  color: #c4b5fd;
+}
+
+.cm {
+  color: #64748b;
+  font-style: italic;
 }
 
 .p {
@@ -592,25 +626,25 @@ textarea {
 @keyframes type-loop {
   0%,
   12% {
-    width: 0;
+    clip-path: inset(0 100% 0 0);
   }
   45%,
   78% {
-    width: var(--typing-width);
+    clip-path: inset(0 0 0 0);
   }
   100% {
-    width: 0;
+    clip-path: inset(0 100% 0 0);
   }
 }
 
 @keyframes cursor-blink {
   0%,
   49% {
-    border-right-color: rgba(29, 181, 255, 0.95);
+    opacity: 1;
   }
   50%,
   100% {
-    border-right-color: transparent;
+    opacity: 0;
   }
 }
 
@@ -695,13 +729,17 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   .particle,
   .typing-text,
+  .typing-text::after,
   .hero-card,
   .service-card {
     animation: none !important;
   }
 
   .typing-text {
-    width: auto;
-    border-right: 0;
+    clip-path: inset(0 0 0 0);
+  }
+
+  .typing-text::after {
+    display: none;
   }
 }
